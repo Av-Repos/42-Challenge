@@ -1,5 +1,3 @@
-# Sagardotegi Optimization Challenge 🪑 (MAEB 2025)
+# HEUR-INDER Optimization Challenge 🪑 (42 Urduliz, 2026)
 
-Welcome to the Sagardotegi Optimization Challenge! The challenge consists of finding the best possible solution to an instance of the Sagardotegi Optimization Problem (SOP). The challenge considers a specific instance created from the OpenReview data of the authors 😎 (see `instance.txt`).
-
-Visit the challenge's [webpage](https://maeb-challenge.streamlit.app/) for more information and submissions!
+¡Bienvenid@ al reto de optimización más romántico! ¡Bienvenid@ al ❤️ HEUR-INDER Optimization Challenge ❤️! En este reto de optimización combinatoria tu trabajo será encontrar la mejor solución posible a un problema con mucho corazón. ¿Estás preparad@ para demostrar tus dotes de cupido? ¡Participa y demuestra de lo que eres capaz!

@@ -3,7 +3,6 @@ import json
 import os
 import ast
 from objective import evaluate_solution
-from sagardotegi_problem import SagardotegiProblem
 import numpy as np
 
 LEADERBOARD_FILE = "leaderboard.json"
@@ -48,32 +47,28 @@ docs = open('docs/solution_format.md', 'r')
 docs_solution_format = docs.read()
 docs.close()
 
-docs = open('docs/about_sop.md', 'r')
+docs = open('docs/about_hop.md', 'r')
 docs_about_sop = docs.read()
-docs.close()
-
-docs = open('docs/similarity.md', 'r')
-docs_similarity = docs.read()
 docs.close()
 
 
 # Streamlit page config
-st.set_page_config(page_title="MAEB-SOC!", layout="wide")
+st.set_page_config(page_title="42 HEUR-INDER!", layout="wide")
 
 # Title and view-only toggle in top-right
 header_col1, header_spacer, header_col2 = st.columns([15, 5, 1])
 
 def toggle_view():
     st.session_state.view_only_mode = not st.session_state.view_only_mode
-    button_label = "📄 Documentation" if not st.session_state.get("view_only_mode", True) else "🏠 Back to Main Page"
+    button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", True) else "🏠 Página principal"
 
 
 with header_col1:
-    st.title("🪑 Sagardotegi Optimization Challenge")
-    button_label = "📄 Documentation" if not st.session_state.get("view_only_mode", False) else "🏠 Back to Main Page"
+    st.title("❤️ HEUR-INDER Optimization Challenge")
+    button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", False) else "🏠 Página principal"
     # if st.button(button_label):
     #     st.session_state.view_only_mode = not st.session_state.view_only_mode
-    #     button_label = "📄 Documentation" if not st.session_state.get("view_only_mode", True) else "🏠 Back to Main Page"
+    #     button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", True) else "🏠 Página principal"
     st.button(button_label, on_click=toggle_view)
 
 with header_col2:
@@ -92,17 +87,14 @@ if st.session_state.view_only_mode:
     # else:
     #     st.info("No submissions yet.")
 
-    with st.expander("About the SOP 🧑‍🏫"):
+    with st.expander("Problema 🧑‍🏫"):
         st.markdown(docs_about_sop)
 
-    with st.expander("Submission format 📤"):
+    with st.expander("Formato de solución 📤"):
         st.markdown(docs_solution_format)
 
-    with st.expander("Suggested setup 🚀"):
+    with st.expander("Código de apoyo 🚀"):
         st.markdown(docs_getting_started)
-
-    with st.expander("How do we measure affinity? 🔍"):
-        st.markdown(docs_similarity)
 
     st.stop()
 
@@ -112,20 +104,20 @@ col1, col2 = st.columns(2)
 
 # === Left side: Submission form ===
 with col1:
-    st.header("📤 Submit Your Solution")
+    st.header("📤 Envía tu solución")
     with st.form("submission_form"):
-        name = st.text_input("Team Name")
-        solution_str = st.text_area("Your solution (e.g., [2, 0, 1, 3])")
+        name = st.text_input("Nombre del participante")
+        solution_str = st.text_area("Tu solución (e.g., 2, 0, 1, 3)")
 
         btn_col1, btn_col2 = st.columns([1, 1])
         with btn_col1:
-            submitted = st.form_submit_button("🚀 Submit")
+            submitted = st.form_submit_button("🚀 Enviar")
         with btn_col2:
-            check_position = st.form_submit_button("🔍 Find My Position")
+            check_position = st.form_submit_button("🔍 Comprobar mi posición")
 
         if submitted:
             if not name.strip():
-                st.warning("⚠️ Please enter your Team Name before submitting.")
+                st.warning("⚠️ Por favor, indica tu nombre antes de enviar.")
             else:
                 try:
                     solution = ast.literal_eval(solution_str)
@@ -134,25 +126,25 @@ with col1:
                     else:
                         success, result = submit_entry(name, solution)
                         if success:
-                            st.success("✅ Submission accepted and leaderboard updated!")
+                            st.success("✅ ¡Solución aceptada y clasificación actualizada!")
                         else:
-                            st.warning(f"⚠️ Your score ({evaluate_solution(solution):.2f}) is not better than your previous best ({result:.2f}). Submission not saved.")
+                            st.warning(f"⚠️ Tu nueva solución ({evaluate_solution(solution):.2f}) no es mejor que tu mejor solución hasta el momento ({result:.2f}). No se ha registrado el envío.")
                 except Exception as e:
-                    st.error(f"❌ Error parsing your solution: {e}")
+                    st.error(f"❌ Error al procesar la solución: {e}")
 
         elif check_position:
             if not name.strip():
-                st.warning("⚠️ Please enter your Team Name to check your position.")
+                st.warning("⚠️ Por favor, indica tu nombre para comprobar tu posición.")
             else:
                 leaderboard = load_leaderboard()
                 entry = next((entry for entry in leaderboard if entry["name"] == name), None)
                 if entry:
                     position = sorted(leaderboard, key=lambda x: x["score"], reverse=True).index(entry) + 1
-                    st.info(f"📊 You're currently ranked **#{position}** with a score of **{entry['score']:.2f}**.")
+                    st.info(f"📊 Te encuentras en la posición **#{position}** con una puntuación de **{entry['score']:.2f}**.")
                 else:
-                    st.warning("❌ Team not found in the leaderboard yet.")
+                    st.warning("❌ Nombre no encontrado en la clasificación.")
 
-    if show_admin:
+"""if show_admin:
         st.divider()
         admin_input = st.text_input("🔐", type="password")
         if "admin" in st.secrets and admin_input == st.secrets["admin"]["passcode"]:
@@ -172,15 +164,15 @@ with col1:
                         st.write(problem.visualize_solution(best_solution, plot=False))
 
                         st.header("Layout 🪑")
-                        st.markdown(problem.solution_to_layout(best_solution, print_stdout=False))
+                        st.markdown(problem.solution_to_layout(best_solution, print_stdout=False))"""
 
 
 # === Right side: Full leaderboard ===
 with col2:
-    st.header("🏆 Live Leaderboard")
+    st.header("🏆 Clasificación en directo")
     leaderboard = load_leaderboard()
     if leaderboard:
         for i, entry in enumerate(leaderboard):
             st.markdown(f"**#{i+1} – {entry['name']}** : {entry['score']:.2f}")
     else:
-        st.info("No submissions yet.")
+        st.info("Sin envíos.")
