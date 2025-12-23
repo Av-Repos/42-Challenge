@@ -5,10 +5,7 @@ import ast
 from objective import evaluate_solution
 import numpy as np
 
-LEADERBOARD_FILE = "leaderboard.json"
-
-#query_params = st.query_params()
-show_admin = "admin" in st.query_params
+LEADERBOARD_FILE = "data/leaderboard.json"
 
 # Load leaderboard
 def load_leaderboard():
@@ -64,7 +61,7 @@ def toggle_view():
 
 
 with header_col1:
-    st.title("❤️ HEUR-INDER Optimization Challenge")
+    st.title("❤️ HEUR-INDER ❤️ Optimization Challenge")
     button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", False) else "🏠 Página principal"
     # if st.button(button_label):
     #     st.session_state.view_only_mode = not st.session_state.view_only_mode
@@ -107,7 +104,7 @@ with col1:
     st.header("📤 Envía tu solución")
     with st.form("submission_form"):
         name = st.text_input("Nombre del participante")
-        solution_str = st.text_area("Tu solución (e.g., 2, 0, 1, 3)")
+        solution_str = st.text_area("Tu solución (e.g., [2, 0, 1, 3])")
 
         btn_col1, btn_col2 = st.columns([1, 1])
         with btn_col1:
@@ -122,7 +119,7 @@ with col1:
                 try:
                     solution = ast.literal_eval(solution_str)
                     if not isinstance(solution, list):
-                        st.error("Solution must be a Python list (e.g., [1, 2, 3, 0])")
+                        st.error("Tu solución debe de ser una lista.")
                     else:
                         success, result = submit_entry(name, solution)
                         if success:
@@ -143,29 +140,6 @@ with col1:
                     st.info(f"📊 Te encuentras en la posición **#{position}** con una puntuación de **{entry['score']:.2f}**.")
                 else:
                     st.warning("❌ Nombre no encontrado en la clasificación.")
-
-"""if show_admin:
-        st.divider()
-        admin_input = st.text_input("🔐", type="password")
-        if "admin" in st.secrets and admin_input == st.secrets["admin"]["passcode"]:
-            with st.expander("⚙️ Admin Panel"):
-                if st.button("🔄 Reset leaderboard"):
-                    save_leaderboard([])
-                    st.success("Leaderboard has been reset.")
-
-                if st.button("Visualize best solution ✨"):
-                    leaderboard = load_leaderboard()
-                    if leaderboard:
-                        best_solution = leaderboard[0]['solution']
-                        best_solution = np.array(best_solution).astype(int)
-
-                        problem = SagardotegiProblem()
-                        st.text("Nodes (authors) are placed based on keyword similarity, while colors indicate the 19 tables.")
-                        st.write(problem.visualize_solution(best_solution, plot=False))
-
-                        st.header("Layout 🪑")
-                        st.markdown(problem.solution_to_layout(best_solution, print_stdout=False))"""
-
 
 # === Right side: Full leaderboard ===
 with col2:
