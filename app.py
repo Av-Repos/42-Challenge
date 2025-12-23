@@ -114,8 +114,6 @@ header_col1, header_spacer, header_col2 = st.columns([15, 5, 1])
 
 def toggle_view():
     st.session_state.view_only_mode = not st.session_state.view_only_mode
-    button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", True) else "🏠 Página principal"
-
 
 with header_col1:
     st.title("❤️4u2❤️ Optimization Challenge")
@@ -123,7 +121,17 @@ with header_col1:
     # if st.button(button_label):
     #     st.session_state.view_only_mode = not st.session_state.view_only_mode
     #     button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", True) else "🏠 Página principal"
-    st.button(button_label, on_click=toggle_view)
+        # Use smaller ratios to bring buttons closer
+    col_btn1, col_btn2, _ = st.columns([1, 1, 4])
+
+    with col_btn1:
+        st.button(button_label, on_click=toggle_view, key="toggle_view")
+
+    with col_btn2:
+        st.link_button(
+            "🧩 Instancia",
+            "https://raw.githubusercontent.com/Av-Repos/42-Challenge/main/data/preferences.dat"
+        )
 
 with header_col2:
     if "view_only_mode" not in st.session_state:
