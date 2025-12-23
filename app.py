@@ -5,6 +5,63 @@ import ast
 from objective import evaluate_solution
 import numpy as np
 
+st.set_page_config(
+    page_title=":heart:4u2:heart:",
+    layout="wide"
+)
+
+def set_bg(png_file):
+    import base64
+    with open(png_file, "rb") as f:
+        data = base64.b64encode(f.read()).decode()
+
+    st.markdown(
+        f"""
+        <style>
+        /* Background image */
+        [data-testid="stAppViewContainer"] {{
+            background-image: url("data:image/avif;base64,{data}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }}
+
+        /* Main layout */
+        [data-testid="stMain"] {{
+            min-height: 100vh;
+            display: flex;
+        }}
+
+        /* Content card */
+        .block-container {{
+            margin: auto;
+            border-radius: 16px;
+            padding: 2.5rem 3rem;
+            max-width: 95%;
+        }}
+
+        /* Light mode */
+        @media (prefers-color-scheme: light) {{
+            .block-container {{
+                background-color: rgba(255, 255, 255, 0.92);
+                color: #000;
+            }}
+        }}
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {{
+            .block-container {{
+                background-color: rgba(20, 20, 20, 0.92);
+                color: #fff;
+            }}
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+set_bg("background.avif")
+
 LEADERBOARD_FILE = "data/leaderboard.json"
 
 # Load leaderboard
@@ -44,13 +101,13 @@ docs = open('docs/solution_format.md', 'r')
 docs_solution_format = docs.read()
 docs.close()
 
-docs = open('docs/about_hop.md', 'r')
+docs = open('docs/about_problem.md', 'r')
 docs_about_sop = docs.read()
 docs.close()
 
 
 # Streamlit page config
-st.set_page_config(page_title="42 HEUR-INDER!", layout="wide")
+st.set_page_config(page_title="4u2", layout="wide")
 
 # Title and view-only toggle in top-right
 header_col1, header_spacer, header_col2 = st.columns([15, 5, 1])
@@ -61,7 +118,7 @@ def toggle_view():
 
 
 with header_col1:
-    st.title("❤️ HEUR-INDER ❤️ Optimization Challenge")
+    st.title("❤️4u2❤️ Optimization Challenge")
     button_label = "📄 Documentación" if not st.session_state.get("view_only_mode", False) else "🏠 Página principal"
     # if st.button(button_label):
     #     st.session_state.view_only_mode = not st.session_state.view_only_mode
@@ -141,12 +198,49 @@ with col1:
                 else:
                     st.warning("❌ Nombre no encontrado en la clasificación.")
 
-# === Right side: Full leaderboard ===
 with col2:
     st.header("🏆 Clasificación en directo")
     leaderboard = load_leaderboard()
+
     if leaderboard:
         for i, entry in enumerate(leaderboard):
-            st.markdown(f"**#{i+1} – {entry['name']}** : {entry['score']:.2f}")
+            if i == 0:
+                bg = "#FFD700"   # Gold
+                text = "#000000"
+                emoji = "🥇"
+                size = 40
+            elif i == 1:
+                bg = "#C0C0C0"   # Silver
+                text = "#000000"
+                emoji = "🥈"
+                size = 40
+            elif i == 2:
+                bg = "#CD7F32"   # Bronze
+                text = "#000000"
+                emoji = "🥉"
+                size = 40
+            else:
+                bg = "transparent"
+                text = "inherit"
+                emoji = ""
+                size = 20
+
+            st.markdown(
+                f"""
+                <div style="
+                    background-color: {bg};
+                    color: {text};
+                    padding: 0.6rem 0.8rem;
+                    border-radius: 8px;
+                    margin-bottom: 0.4rem;
+                    font-weight: 600;
+                    font-size: {size}px;
+                ">
+                    {emoji} #{i+1} – {entry['name']} : {f"{int(entry['score']):,}".replace(",", ".")}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
     else:
         st.info("Sin envíos.")
+

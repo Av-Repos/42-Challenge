@@ -1,8 +1,8 @@
 import numpy as np
 from numpy.typing import NDArray
 
-class HeurinderProblem:
-    """Main class of the Heurinder Optimization Problem."""
+class ForUTwo:
+    """Main class of the 4u2 Optimization Problem."""
 
     def __init__(
         self,

@@ -1,4 +1,4 @@
-Comenzar a trabajar en un problema desde cero puede ser un reto, pero... ¡No desesperes! Desde **HEUR-INDER** se te proporcionan unas pocas funcionalidades que pueden ser de gran ayuda. Por desgracia, estas funcionalidades tan solo están disponibles en **Python** y **C**, aunque siempre puedes crear las tuyas propias en el lenguaje de programación que prefieras. Puedes descargar los archivos necesarios desde los links que se proporcionan a  (**click derecho + guardar como**).
+Comenzar a trabajar en un problema desde cero puede ser un reto, pero... ¡No desesperes! Desde **:heart:4u2:heart:** se te proporcionan unas pocas funcionalidades que pueden ser de gran ayuda. Por desgracia, estas funcionalidades tan solo están disponibles en **Python** y **C**, aunque siempre puedes crear las tuyas propias en el lenguaje de programación que prefieras. Puedes descargar los archivos necesarios desde los links que se proporcionan a  (**click derecho + guardar como**).
 
 [**Código Python**](https://raw.githubusercontent.com/Av-Repos/42-Challenge/main/user/py/utils.py)🐍
 
