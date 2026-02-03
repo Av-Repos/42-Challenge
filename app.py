@@ -182,11 +182,15 @@ with col1:
         if submitted:
             if not name.strip():
                 st.warning("⚠️ Por favor, indica tu nombre antes de enviar.")
+            elif len(name) > 20:
+            	st.warning("⚠️ Tu nombre no puede contener más de 20 caracteres.")
+            elif not name.isalnum():
+            	st.warning("⚠️ Tu nombre solo puede contener caracteres alfanuméricos.")
             else:
                 try:
                     solution = ast.literal_eval(solution_str)
                     if not isinstance(solution, list):
-                        st.error("Tu solución debe de ser una lista.")
+                        st.error("")
                     else:
                         success, result = submit_entry(name, solution)
                         if success:
@@ -194,8 +198,7 @@ with col1:
                         else:
                             st.warning(f"⚠️ Tu nueva solución ({evaluate_solution(solution):.2f}) no es mejor que tu mejor solución hasta el momento ({result:.2f}). No se ha registrado el envío.")
                 except Exception as e:
-                    st.error(f"❌ Error al procesar la solución: {e}")
-
+                    st.error(f"❌ Error: Tu solución debe de ser una lista de 200 números (0-199), sin repetición.")
         elif check_position:
             if not name.strip():
                 st.warning("⚠️ Por favor, indica tu nombre para comprobar tu posición.")
