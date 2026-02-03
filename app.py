@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import os
 import ast
+from datetime import datetime
 from objective import evaluate_solution
 import numpy as np
 
@@ -78,6 +79,7 @@ def save_leaderboard(lb):
 
 # Submit a new entry only if better
 def submit_entry(name, solution):
+    time = datetime.now().strftime("%H:%M:%S")
     score = evaluate_solution(solution)
     leaderboard = load_leaderboard()
     existing_entry = next((entry for entry in leaderboard if entry["name"] == name), None)
@@ -86,8 +88,8 @@ def submit_entry(name, solution):
         return False, existing_entry["score"]  # Keep best
 
     leaderboard = [entry for entry in leaderboard if entry["name"] != name]
-    leaderboard.append({"name": name, "solution": solution, "score": score})
-    leaderboard = sorted(leaderboard, key=lambda x: x["score"], reverse=True)
+    leaderboard.append({"name": name, "solution": solution, "score": score, "time": time})
+    leaderboard = sorted(leaderboard,key=lambda x: (-x["score"], x["time"]))
     save_leaderboard(leaderboard)
     return True, score
 
@@ -201,7 +203,7 @@ with col1:
                 leaderboard = load_leaderboard()
                 entry = next((entry for entry in leaderboard if entry["name"] == name), None)
                 if entry:
-                    position = sorted(leaderboard, key=lambda x: x["score"], reverse=True).index(entry) + 1
+                    position = sorted(leaderboard,key=lambda x: (-x["score"], x["time"])).index(entry) + 1
                     st.info(f"📊 Te encuentras en la posición **#{position}** con una puntuación de **{entry['score']:.2f}**.")
                 else:
                     st.warning("❌ Nombre no encontrado en la clasificación.")
@@ -244,7 +246,7 @@ with col2:
                     font-weight: 600;
                     font-size: {size}px;
                 ">
-                    {emoji} #{i+1} – {entry['name']} : {f"{int(entry['score']):,}".replace(",", ".")}
+                    {emoji} #{i+1} – {entry['name']} : {f"{int(entry['score']):,}".replace(",", ".")} ({entry['time']})
                 </div>
                 """,
                 unsafe_allow_html=True

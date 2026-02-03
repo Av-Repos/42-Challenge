@@ -1,9 +1,9 @@
 ¿Ya tienes tu solución? ¿Quieres enviarla al juez online para que sea valorada? No te preocupes, porque es muy sencillo. Primero, asegurate de que tu solución cumple con los siguientes requisitos:
 
 - Es una lista de $200$ números delimitada mediante corchetes.
-- Incluye los números del $0$ al $199$ separados por comas, representando los $200$ candidatos a ordenar.
+- Incluye los números del $0$ al $199$ separados por comas.
 - Cada número aparece exactamente una vez, sin duplicados.
-- Si un candidato $i$ aparece antes que otro candidato $j$ en la lista, implica que $i$ se prefiere sobre $j$ en la ordenación propuesta.
+- Si un candidat@ $i$ aparece antes que un candidat@ $j$ en la lista, implica que $i$ se prefiere sobre $j$ en la ordenación propuesta.
 
 > **Ejemplo**
 >
