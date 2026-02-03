@@ -8,9 +8,9 @@ Te detienes ante una valla publicitaria en tu camino a casa. Sus grandes luces d
 
 > ¡Bienvenid@ a **:heart:4u2:heart:**! ¡La aplicación que te permite ordenar a tus futuras medias naranjas en función de tus preferencias!
 
-> A continuación, se te mostrará una serie de **100** posibles candidat@s especificamente seleccionad@s para ti. Sabemos que decidirse entre tantas personas a la vez puede ser complicado, por lo que tan solo te pediremos que nos digas qué opción prefieres de entre cada par de candidat@s. Fácil, ¿Verdad?
+> A continuación, se te mostrará una serie de **200** posibles candidat@s especificamente seleccionad@s para ti. Sabemos que decidirse entre tantas personas a la vez puede ser complicado, por lo que tan solo te pediremos que nos digas qué opción prefieres de entre cada par de candidat@s. Fácil, ¿Verdad?
 
-> Una vez nos hayas indicado tus preferencias para... Los **4.950** pares posibles, ejem, tan solo deberás confirmar tu solicitud y nosotros nos encargaremos de ordenar todas las opciones mediante algoritmos meta-heurísticos. Después, podrás comenzar a chatear con l@s candidat@s que hayan quedado más arriba en el ranking de tu corazón. ¿A qué esperas? :revolving_hearts: ¡Únete a la búsqueda del amor! :revolving_hearts:
+> Una vez nos hayas indicado tus preferencias para... Los **19.900** pares posibles, ejem, tan solo deberás confirmar tu solicitud y nosotros nos encargaremos de ordenar todas las opciones mediante algoritmos meta-heurísticos. Después, podrás comenzar a chatear con l@s candidat@s que hayan quedado más arriba en el ranking de tu corazón. ¿A qué esperas? :revolving_hearts: ¡Únete a la búsqueda del amor! :revolving_hearts:
 
 Bueno, la esperanza es lo último que se pierde. Veamos que tal funciona esto de la meta-heurística...
 
@@ -18,7 +18,7 @@ Bueno, la esperanza es lo último que se pierde. Veamos que tal funciona esto de
 
 Tu nuevo trabajo en **:heart:4u2:heart:** comienza fuerte. ¡Un usuari@ ya ha mandado su solicitud, y tú aún no has implementado el algoritmo que le ayudará a encontrar a su futuro amor! Por suerte, la versión gratuita de la aplicación notifica los resultados con **2 horas y media** de retraso. Por lo que ese es, precisamente, el tiempo que tienes para arreglar este desaguisado.
 
-Los datos con los que puedes trabajar están reflejados en el archivo *preferences.dat*. El formato es sencillo, se trata de una matriz de tamaño $100\times 100$ con números enteros que van del $0$ al $100$. El valor situado en la fila $i$ columna $j$ nos indicará el porcentaje de preferencia otorgado por el usuari@ al candidat@ $i$ sobre el candidat@ $j$. Por definición, la suma de la preferencia de $i$ sobre $j$ y la preferencia de $j$ sobre $i$ debe de ser $100$. Además, lo valores en la diagonal principal (fila $i$ columna $i$) serán todos $0$, y no se utilizarán durante la resolución del problema.
+Los datos con los que puedes trabajar están reflejados en el archivo *preferences.dat*. El formato es sencillo, se trata de una matriz de tamaño $200\times 200$ con números enteros que van del $0$ al $100$. El valor situado en la fila $i$ columna $j$ nos indicará el porcentaje de preferencia otorgado por el usuari@ al candidat@ $i$ sobre el candidat@ $j$. Por definición, la suma de la preferencia de $i$ sobre $j$ y la preferencia de $j$ sobre $i$ debe de ser $100$. Además, lo valores en la diagonal principal (fila $i$ columna $i$) serán todos $0$, y no se utilizarán durante la resolución del problema.
 
 > **Ejemplo**
 >
