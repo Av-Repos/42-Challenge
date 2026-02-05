@@ -4,6 +4,7 @@ import os
 import ast
 from datetime import datetime
 from objective import evaluate_solution
+from heatmap import generate_heatmap
 import numpy as np
 
 st.set_page_config(
@@ -93,6 +94,11 @@ def submit_entry(name, solution):
     save_leaderboard(leaderboard)
     return True, score
 
+# Show solution heatmap as dialog
+@st.dialog("¡Mapa de calor de tu solución!")
+def show_heatmap(solution):
+    fig = generate_heatmap(solution)
+    st.pyplot(fig)
 
 # Load the docs
 docs = open('docs/getting_started.md', 'r')
@@ -195,6 +201,7 @@ with col1:
                         success, result = submit_entry(name, solution)
                         if success:
                             st.success("✅ ¡Solución aceptada y clasificación actualizada!")
+                            show_heatmap(solution)
                         else:
                             st.warning(f"⚠️ Tu nueva solución ({evaluate_solution(solution):.2f}) no es mejor que tu mejor solución hasta el momento ({result:.2f}). No se ha registrado el envío.")
                 except Exception as e:
@@ -256,4 +263,3 @@ with col2:
             )
     else:
         st.info("Sin envíos.")
-
