@@ -3,6 +3,7 @@ import json
 import os
 import ast
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from objective import evaluate_solution
 from heatmap import generate_heatmap
 import numpy as np
@@ -80,7 +81,7 @@ def save_leaderboard(lb):
 
 # Submit a new entry only if better
 def submit_entry(name, solution):
-    time = datetime.now().strftime("%H:%M:%S")
+    time = datetime.now(ZoneInfo("Europe/Madrid")).strftime("%H:%M:%S")
     score = evaluate_solution(solution)
     leaderboard = load_leaderboard()
     existing_entry = next((entry for entry in leaderboard if entry["name"] == name), None)
